@@ -40,6 +40,8 @@ public class BrowserUtils {
     }
 
     public static void titleVerify(String expectedTitle){
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        wait.until(ExpectedConditions.titleIs(expectedTitle));
         String actualTitle = Driver.getDriver().getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
