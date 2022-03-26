@@ -9,7 +9,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+
+import java.util.concurrent.TimeUnit;
 
 public class File_step_defs {
 
@@ -56,7 +60,14 @@ public class File_step_defs {
     String fileName;
     @When("user choose the {string} option")
     public void user_choose_the_option(String option) {
-        FilePage.chooseOption(option);
+        if (filePage.firstOption.getText().equals(option) ){
+            FilePage.chooseOption(option);
+        } else {
+            filePage.firstOption.click();
+            BrowserUtils.highlight(filePage.triDots);
+            filePage.triDots.click();
+            FilePage.chooseOption(option);
+        }
         fileName = filePage.fileName.getText();
     }
 
@@ -69,5 +80,45 @@ public class File_step_defs {
     public void verify_the_chosen_file_is_listed_on_the_table() {
         BrowserUtils.highlight(filePage.favFileName);
         Assert.assertEquals(fileName, filePage.favFileName.getText());
+    }
+
+    @Then("Verify the chosen file removed from the table")
+    public void verify_the_chosen_file_removed_from_the_table() {
+        try {
+            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            filePage.favFileName.click();
+        }catch (NoSuchElementException e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            Assert.assertTrue(true);
+        }
+    }
+
+    @When("the user clicks the add icon on the top")
+    public void the_user_clicks_the_add_icon_on_the_top() {
+        BrowserUtils.highlight(filePage.addNewFileBtn);
+        filePage.addNewFileBtn.click();
+    }
+
+    String filePath = "D:/Ford-F-150.jpg";
+    String imageFile = "Ford-F-150.jpg";
+
+    @When("user uploads file with the upload file option")
+    public void user_uploads_file_with_the_upload_file_option() {
+        filePage.upload.sendKeys(filePath);
+        //filePage.uploadFileBtn.sendKeys(filePath);
+        BrowserUtils.sleep(1);
+    }
+
+    @Then("Verify the file is displayed on the page")
+    public void verify_the_file_is_displayed_on_the_page() {
+        WebElement uploadedFile = Driver.getDriver().findElement(By.xpath("//*[.='"+imageFile+"']"));
+        BrowserUtils.highlight(uploadedFile);
+        Assert.assertTrue(uploadedFile.isDisplayed());
+
+        // Remove uploaded file
+        WebElement actionsForUploaded = Driver.getDriver().findElement(By.xpath("//span[.='"+imageFile+"']/..//a[2]"));
+        BrowserUtils.highlight(actionsForUploaded);
+        actionsForUploaded.click();
+        FilePage.chooseOption("Delete file");
     }
 }

@@ -24,6 +24,10 @@ public class FilePage {
     @FindBy (xpath = "//tr[1]//a[@data-action='menu']") public WebElement triDots;
     @FindBy (xpath = "//tr[1]//span[@class='innernametext']") public WebElement fileName;
     @FindBy (xpath = "//*[@class='filename']//*[@class='innernametext']") public WebElement favFileName;
+    @FindBy (xpath = "//*[@class='button new']") public WebElement addNewFileBtn;
+    @FindBy (xpath = "//div[@class='fileActionsMenu popovermenu bubble open menu']//li[3]//span[2]") public WebElement firstOption;
+    @FindBy (xpath = "//*[@for='file_upload_start']") public WebElement uploadFileBtn;
+    @FindBy (xpath = "//input[@id='file_upload_start']") public WebElement upload;
 
    // @FindBy (xpath = "//*[.='Add to favorites']/..") public WebElement addToFavoritesBtn;
     public static void chooseOption(String option){
