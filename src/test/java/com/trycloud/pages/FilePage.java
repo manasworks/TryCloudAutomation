@@ -2,6 +2,7 @@ package com.trycloud.pages;
 
 import com.trycloud.utilities.BrowserUtils;
 import com.trycloud.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -31,17 +32,32 @@ public class FilePage {
     @FindBy (xpath = "//*[@value='New folder']") public WebElement newFolderInput;
     @FindBy (xpath = "//*[@class='icon-confirm']") public WebElement submitFolderNameBtn;
 
-   // @FindBy (xpath = "//*[.='Add to favorites']/..") public WebElement addToFavoritesBtn;
     public static void chooseOption(String option){
         WebElement element = Driver.getDriver().findElement(By.xpath("//*[.='"+option+"']/.."));
         BrowserUtils.highlight(element);
         element.click();
     }
 
-    //@FindBy (xpath = "//*[.='Favorites']") public WebElement favoritesLink;
     public static void clickSubModule(String module){
         WebElement element = Driver.getDriver().findElement(By.xpath("//*[.='"+module+"']"));
         BrowserUtils.highlight(element);
         element.click();
+    }
+
+    public static void verifyFileDisplayed(String fileName){
+        WebElement uploadedFile = Driver.getDriver().findElement(By.xpath("//*[.='"+fileName+"']"));
+        BrowserUtils.highlight(uploadedFile);
+        Assert.assertTrue(uploadedFile.isDisplayed());
+
+        // Remove uploaded file
+        WebElement actionsForUploaded = Driver.getDriver().findElement(By.xpath("//span[.='"+fileName+"']/..//a[2]"));
+        BrowserUtils.highlight(actionsForUploaded);
+        actionsForUploaded.click();
+        FilePage.chooseOption("Delete file");
+    }
+
+    public static void uploadFile(String path){
+        WebElement upload = Driver.getDriver().findElement(By.xpath("//input[@id='file_upload_start']"));
+        upload.sendKeys(path);
     }
 }
