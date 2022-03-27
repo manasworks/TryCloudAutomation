@@ -17,7 +17,7 @@ public class TryCloudUtils {
         LoginPage loginPage = new LoginPage();
 
         BrowserUtils.highlight(loginPage.usernameInput);
-        loginPage.usernameInput.sendKeys(ConfigurationReader.getProperty("user1"));
+        loginPage.usernameInput.sendKeys(ConfigurationReader.getProperty("user4"));
 
         BrowserUtils.highlight(loginPage.passwordInput);
         loginPage.passwordInput.sendKeys(ConfigurationReader.getProperty("pass")+ Keys.ENTER);
@@ -44,6 +44,7 @@ public class TryCloudUtils {
 
     public static void uploadFile(String path){
         FilePage filePage = new FilePage();
+        BrowserUtils.sleep(1);
         filePage.upload.sendKeys(path);
         TryCloudUtils.waitTillUploadBarDisappears();
     }

@@ -2,7 +2,6 @@ package com.trycloud.pages;
 
 import com.trycloud.utilities.BrowserUtils;
 import com.trycloud.utilities.Driver;
-import com.trycloud.utilities.TryCloudUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,12 +16,8 @@ public class FilePage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
-    @FindBy (xpath = "//*[@for='select_all_files']")
-    public WebElement firstCheckbox;
-
-    @FindBy (xpath = "//tbody/tr")
-    public List<WebElement> listCheckboxes;
-
+    @FindBy (xpath = "//*[@for='select_all_files']") public WebElement firstCheckbox;
+    @FindBy (xpath = "//tbody/tr") public List<WebElement> listCheckboxes;
     @FindBy (xpath = "//tr[1]//a[@data-action='menu']") public WebElement triDots;
     @FindBy (xpath = "//tr[1]//span[@class='innernametext']") public WebElement fileName;
     @FindBy (xpath = "//*[@class='filename']//*[@class='innernametext']") public WebElement favFileName;
@@ -41,6 +36,15 @@ public class FilePage {
     @FindBy (xpath = "//div[@id='app-settings-content']//input[@type='checkbox']") public List<WebElement> settingsCheckboxes;
     @FindBy (xpath = "//p[contains(text(),'used')]") public WebElement storageStatus;
     @FindBy (xpath = "//div[@id='uploadprogressbar']") public WebElement uploadBar;
+
+    // Holder for actual file name
+    private static String fileNameH;
+    public static String getFileNameHolder() {
+        return fileNameH;
+    }
+    public static void setFileNameHolder(String fileNameHolder) {
+        fileNameH = fileNameHolder;
+    }
 
     public static void chooseOption(String option){
         WebElement element = Driver.getDriver().findElement(By.xpath("//*[@class='fileActionsMenu popovermenu bubble open menu']//*[contains(text(),'"+option+"')]/.."));

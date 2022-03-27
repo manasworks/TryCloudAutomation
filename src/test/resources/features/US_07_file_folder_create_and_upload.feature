@@ -5,7 +5,7 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
     Given user on the dashboard page
     When the user clicks the "Files" module
     And the user clicks the add icon on the top
-    And user click the "New folder" sub-module
+    And user click the "New folder" top-module
     And the user write a "Test19" to folder name
     When the user click submit icon
     Then Verify the "Test19" folder is displayed on the page
