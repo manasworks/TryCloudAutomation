@@ -33,6 +33,9 @@ public class FilePage {
     @FindBy (xpath = "//*[@class='icon-confirm']") public WebElement submitFolderNameBtn;
     @FindBy (xpath = "//th[@id='headerDate']//span[.='Deleted']/..") public WebElement deletedFilter;
     @FindBy (xpath = "(//a[@class='action action-restore permanent'])[1]") public WebElement restoreBtn;
+    @FindBy (id = "commentsTabView") public WebElement commentBtn;
+    @FindBy (xpath = "//div[@class='message' and @data-placeholder='New comment …']") public WebElement commentInput;
+    @FindBy (xpath = "//input[@class='submit icon-confirm has-tooltip']") public WebElement commentSubmit;
 
 
     public static void chooseOption(String option){
