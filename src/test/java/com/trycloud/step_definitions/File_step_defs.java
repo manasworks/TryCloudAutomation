@@ -1,6 +1,6 @@
 package com.trycloud.step_definitions;
 
-import com.google.common.base.Verify;
+import com.sun.source.tree.AssertTree;
 import com.trycloud.pages.FilePage;
 import com.trycloud.utilities.BrowserUtils;
 import com.trycloud.utilities.ConfigurationReader;
@@ -104,7 +104,7 @@ public class File_step_defs {
     @When("user uploads file with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
         String filePath = "D:/Ford-F-150.jpg";
-        FilePage.uploadFile(filePath);
+        TryCloudUtils.uploadFile(filePath);
     }
 
     @Then("Verify the file is displayed on the page")
@@ -179,5 +179,36 @@ public class File_step_defs {
         WebElement element = Driver.getDriver().findElement(By.xpath("//*[.='"+message+"']"));
         BrowserUtils.highlight(element);
         Assert.assertTrue(element.isDisplayed());
+    }
+
+    @Then("the user should be able to click any buttons")
+    public void the_user_should_be_able_to_click_any_buttons() {
+        int i=0;
+        for (WebElement each : filePage.settingsCheckboxesBtn) {
+            BrowserUtils.highlight(each);
+            boolean beforeClick = filePage.settingsCheckboxes.get(i).isSelected();
+            each.click();
+            boolean afterClick = filePage.settingsCheckboxes.get(i).isSelected();
+            Assert.assertNotEquals(beforeClick, afterClick);
+            i++;
+        }
+    }
+
+    String beforeStorage, afterStorage;
+    @When("user checks the current storage usage")
+    public void user_checks_the_current_storage_usage() {
+        beforeStorage = filePage.storageStatus.getText();
+    }
+
+    @When("user refresh the page")
+    public void user_refresh_the_page() {
+        Driver.getDriver().navigate().refresh();
+    }
+
+    @Then("the user should be able to see storage usage is increased")
+    public void the_user_should_be_able_to_see_storage_usage_is_increased() {
+        afterStorage = filePage.storageStatus.getText();
+        Assert.assertNotEquals(beforeStorage, afterStorage);
+        TryCloudUtils.removeUploaded("Ford");
     }
 }

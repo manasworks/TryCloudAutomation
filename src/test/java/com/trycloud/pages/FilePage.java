@@ -2,6 +2,7 @@ package com.trycloud.pages;
 
 import com.trycloud.utilities.BrowserUtils;
 import com.trycloud.utilities.Driver;
+import com.trycloud.utilities.TryCloudUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -36,7 +37,10 @@ public class FilePage {
     @FindBy (id = "commentsTabView") public WebElement commentBtn;
     @FindBy (xpath = "//div[@class='message' and @data-placeholder='New comment …']") public WebElement commentInput;
     @FindBy (xpath = "//input[@class='submit icon-confirm has-tooltip']") public WebElement commentSubmit;
-
+    @FindBy (xpath = "//div[@id='app-settings-content']//input[@type='checkbox']//following-sibling::label") public List<WebElement> settingsCheckboxesBtn;
+    @FindBy (xpath = "//div[@id='app-settings-content']//input[@type='checkbox']") public List<WebElement> settingsCheckboxes;
+    @FindBy (xpath = "//p[contains(text(),'used')]") public WebElement storageStatus;
+    @FindBy (xpath = "//div[@id='uploadprogressbar']") public WebElement uploadBar;
 
     public static void chooseOption(String option){
         WebElement element = Driver.getDriver().findElement(By.xpath("//*[@class='fileActionsMenu popovermenu bubble open menu']//*[contains(text(),'"+option+"')]/.."));
@@ -45,7 +49,7 @@ public class FilePage {
     }
 
     public static void clickSubModule(String module){
-        WebElement element = Driver.getDriver().findElement(By.xpath("//*[.='"+module+"']"));
+        WebElement element = Driver.getDriver().findElement(By.xpath("//div[@id='app-navigation']//*[normalize-space(.)='"+module+"']"));
         BrowserUtils.highlight(element);
         element.click();
     }
@@ -62,8 +66,4 @@ public class FilePage {
         FilePage.chooseOption("Delete file");
     }
 
-    public static void uploadFile(String path){
-        WebElement upload = Driver.getDriver().findElement(By.xpath("//input[@id='file_upload_start']"));
-        upload.sendKeys(path);
-    }
 }
