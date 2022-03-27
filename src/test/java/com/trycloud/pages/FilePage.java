@@ -28,6 +28,8 @@ public class FilePage {
     @FindBy (xpath = "//div[@class='fileActionsMenu popovermenu bubble open menu']//li[3]//span[2]") public WebElement firstOption;
     @FindBy (xpath = "//*[@for='file_upload_start']") public WebElement uploadFileBtn;
     @FindBy (xpath = "//input[@id='file_upload_start']") public WebElement upload;
+    @FindBy (xpath = "//*[@value='New folder']") public WebElement newFolderInput;
+    @FindBy (xpath = "//*[@class='icon-confirm']") public WebElement submitFolderNameBtn;
 
    // @FindBy (xpath = "//*[.='Add to favorites']/..") public WebElement addToFavoritesBtn;
     public static void chooseOption(String option){

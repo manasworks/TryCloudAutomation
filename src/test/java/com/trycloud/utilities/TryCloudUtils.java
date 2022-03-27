@@ -8,10 +8,10 @@ import org.openqa.selenium.WebElement;
 
 public class TryCloudUtils {
 
-    static LoginPage loginPage;
+
 
     public static void login(){
-        loginPage = new LoginPage();
+        LoginPage loginPage = new LoginPage();
 
         BrowserUtils.highlight(loginPage.usernameInput);
         loginPage.usernameInput.sendKeys(ConfigurationReader.getProperty("user1"));
