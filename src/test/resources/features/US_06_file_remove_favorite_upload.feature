@@ -6,7 +6,7 @@ Feature: As a user, I should be able to remove files from favorites and upload a
     When the user clicks the "Files" module
     When the user clicks action-icon from any file on the page
     And user choose the "Remove from favorites" option
-    And user click the "Favorites" sub-module on the left side
+    And user click the "Favorites" sub-module
     Then Verify the chosen file removed from the table
 
   Scenario: verify users to upload a file from Files

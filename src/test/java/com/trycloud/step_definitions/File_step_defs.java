@@ -62,12 +62,12 @@ public class File_step_defs {
 
     @When("user choose the {string} option")
     public void user_choose_the_option(String option) {
-        if (filePage.firstOption.getText().equals(option)) {
-            FilePage.chooseOption(option);
-        } else {
+        if (option.contains("favorites") && !filePage.firstOption.getText().equals(option)) {
             filePage.firstOption.click();
             BrowserUtils.highlight(filePage.triDots);
             filePage.triDots.click();
+            FilePage.chooseOption(option);
+        } else {
             FilePage.chooseOption(option);
         }
         fileName = filePage.fileName.getText();
@@ -145,6 +145,18 @@ public class File_step_defs {
         WebElement folderName = Driver.getDriver().findElement(By.xpath("//span[@class='innernametext' and .='" + folder + "']"));
         BrowserUtils.highlight(folderName);
         folderName.click();
+    }
+
+    @Then("Verify the deleted file is displayed on the page")
+    public void verify_the_deleted_file_is_displayed_on_the_page() {
+        BrowserUtils.highlight(filePage.deletedFilter);
+        filePage.deletedFilter.click();
+        filePage.deletedFilter.click();
+        WebElement element = Driver.getDriver().findElement(By.xpath("//td//*[.='"+fileName+"']"));
+        BrowserUtils.highlight(element);
+        Assert.assertTrue(element.isDisplayed());
+        BrowserUtils.highlight(filePage.restoreBtn);
+        filePage.restoreBtn.click();
     }
 
 

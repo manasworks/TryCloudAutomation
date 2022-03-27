@@ -31,9 +31,12 @@ public class FilePage {
     @FindBy (xpath = "//input[@id='file_upload_start']") public WebElement upload;
     @FindBy (xpath = "//*[@value='New folder']") public WebElement newFolderInput;
     @FindBy (xpath = "//*[@class='icon-confirm']") public WebElement submitFolderNameBtn;
+    @FindBy (xpath = "//th[@id='headerDate']//span[.='Deleted']/..") public WebElement deletedFilter;
+    @FindBy (xpath = "(//a[@class='action action-restore permanent'])[1]") public WebElement restoreBtn;
+
 
     public static void chooseOption(String option){
-        WebElement element = Driver.getDriver().findElement(By.xpath("//*[.='"+option+"']/.."));
+        WebElement element = Driver.getDriver().findElement(By.xpath("//*[@class='fileActionsMenu popovermenu bubble open menu']//*[contains(text(),'"+option+"')]/.."));
         BrowserUtils.highlight(element);
         element.click();
     }

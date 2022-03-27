@@ -65,7 +65,7 @@ public class BrowserUtils {
         jsExecutor.executeScript("arguments[0].style.border='3px solid orange'", element);
         jsExecutor.executeScript("arguments[0].style.backgroundColor='yellow'", element);
         jsExecutor.executeScript("arguments[0].style.color='black'", element);
-        //BrowserUtils.sleep(0.01);
+        BrowserUtils.sleep(0.5);
 
         jsExecutor.executeScript("arguments[0].style.backgroundColor=''", element);
         jsExecutor.executeScript("arguments[0].style.border='0px solid black'", element);
