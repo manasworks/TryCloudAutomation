@@ -33,15 +33,15 @@ public class US_06_Files_Remove_upload {
         filePage.addNewFileBtn.click();
     }
 
-    @When("user uploads file with the upload file option")
+    @When("user uploads file with the upload file1 option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = ConfigurationReader.getProperty("file");
+        String filePath = ConfigurationReader.getProperty("file1");
         TryCloudUtils.uploadFile(filePath);
     }
 
-    @Then("Verify the file is displayed on the page")
+    @Then("Verify the file1 is displayed on the page")
     public void verify_the_file_is_displayed_on_the_page(){
-        String filePath = ConfigurationReader.getProperty("file");
+        String filePath = ConfigurationReader.getProperty("file1");
         String file = filePath.substring(filePath.lastIndexOf("/")+1);
         FilePage.verifyFileDisplayed(file);
     }

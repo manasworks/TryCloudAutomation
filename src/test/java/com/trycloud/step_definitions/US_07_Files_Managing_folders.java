@@ -2,7 +2,9 @@ package com.trycloud.step_definitions;
 
 import com.trycloud.pages.FilePage;
 import com.trycloud.utilities.BrowserUtils;
+import com.trycloud.utilities.ConfigurationReader;
 import com.trycloud.utilities.Driver;
+import com.trycloud.utilities.TryCloudUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -50,5 +52,19 @@ public class US_07_Files_Managing_folders {
         WebElement folderName = Driver.getDriver().findElement(By.xpath("//span[@class='innernametext' and .='" + folder + "']"));
         BrowserUtils.highlight(folderName);
         folderName.click();
+    }
+
+    @When("user uploads file2 with the upload file option")
+    public void user_uploads_file_with_the_upload_file_option() {
+        String filePath = ConfigurationReader.getProperty("file2");
+        TryCloudUtils.uploadFile(filePath);
+    }
+
+    @Then("Verify the file2 is displayed on the page")
+    public void verify_the_file_is_displayed_on_the_page(){
+        String filePath = ConfigurationReader.getProperty("file2");
+        String file = filePath.substring(filePath.lastIndexOf("/")+1);
+        System.out.println(file);
+        FilePage.verifyFileDisplayed(file);
     }
 }

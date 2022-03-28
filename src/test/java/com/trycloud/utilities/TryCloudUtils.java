@@ -5,9 +5,12 @@ import com.trycloud.pages.LoginPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public class TryCloudUtils {
 
@@ -44,9 +47,14 @@ public class TryCloudUtils {
 
     public static void uploadFile(String path){
         FilePage filePage = new FilePage();
-        BrowserUtils.sleep(1);
-        filePage.upload.sendKeys(path);
-        TryCloudUtils.waitTillUploadBarDisappears();
+        try {
+            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            filePage.notEnoughSpaceBtn.click();
+        } catch (NoSuchElementException e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            filePage.upload.sendKeys(path);
+            TryCloudUtils.waitTillUploadBarDisappears();
+        }
     }
 
     public static void removeUploaded(String fileName){

@@ -15,5 +15,5 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
     When the user clicks the "Files" module
     And the user choose a "Talk" folder from the page
     And the user clicks the add icon on the top
-    When user uploads file with the upload file option
-    Then Verify the file is displayed on the page
+    When user uploads file2 with the upload file option
+    Then Verify the file2 is displayed on the page

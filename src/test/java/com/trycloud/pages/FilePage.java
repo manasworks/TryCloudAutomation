@@ -36,6 +36,7 @@ public class FilePage {
     @FindBy (xpath = "//div[@id='app-settings-content']//input[@type='checkbox']") public List<WebElement> settingsCheckboxes;
     @FindBy (xpath = "//p[contains(text(),'used')]") public WebElement storageStatus;
     @FindBy (xpath = "//div[@id='uploadprogressbar']") public WebElement uploadBar;
+    @FindBy (xpath = "//div[@class='toastify on dialogs error toastify-right toastify-top']/span") public WebElement notEnoughSpaceBtn;
 
     // Holder for actual file name
     private static String fileNameH;
