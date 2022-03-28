@@ -64,7 +64,7 @@ public class US_07_Files_Managing_folders {
         filePage.upload.sendKeys(filePath);
         try {
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            if (filePage.notEnoughSpaceBtn.isDisplayed()){
+            while (filePage.notEnoughSpaceBtn.isDisplayed()){
                 filePage.notEnoughSpaceBtn.click();
                 filePage.upload.sendKeys(filePath);
             }

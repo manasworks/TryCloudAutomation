@@ -1,5 +1,6 @@
 package com.trycloud.step_definitions;
 
+import com.trycloud.utilities.BrowserUtils;
 import com.trycloud.utilities.Driver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
@@ -25,5 +26,6 @@ public class Hooks {
         }
 
         Driver.closeDriver();
+        BrowserUtils.sleep(1);
     }
 }
