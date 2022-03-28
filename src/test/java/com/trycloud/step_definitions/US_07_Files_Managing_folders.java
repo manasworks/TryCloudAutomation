@@ -47,7 +47,8 @@ public class US_07_Files_Managing_folders {
         WebElement actionsForUploaded = Driver.getDriver().findElement(By.xpath("//span[@class='innernametext' and .='" + folder + "']/../..//a[2]"));
         BrowserUtils.highlight(actionsForUploaded);
         actionsForUploaded.click();
-        FilePage.chooseOption("Delete folder");
+        BrowserUtils.sleep(1);
+        FilePage.chooseOption("Delete");
     }
 
     @When("the user choose a {string} folder from the page")
