@@ -42,12 +42,4 @@ public class TryCloudUtils {
         }
     }
 
-    public static void removeUploaded(String fileName){
-        WebElement uploadedElm = Driver.getDriver().findElement(By.xpath("//*[contains(text(), '"+fileName+"')]/../..//a[2]"));
-        uploadedElm.click();
-
-        WebElement deleteBtn = Driver.getDriver().findElement(By.xpath("//*[contains(text(), 'Delete file')]"));
-        deleteBtn.click();
-    }
-
 }

@@ -1,8 +1,8 @@
 package com.trycloud.step_definitions;
 
 import com.trycloud.pages.FilePage;
+import com.trycloud.pages.UploadFilesPage;
 import com.trycloud.utilities.BrowserUtils;
-import com.trycloud.utilities.ConfigurationReader;
 import com.trycloud.utilities.Driver;
 import com.trycloud.utilities.TryCloudUtils;
 import io.cucumber.java.en.Then;
@@ -16,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class US_10_Files_Update_Settings {
 
     FilePage filePage = new FilePage();
+    UploadFilesPage uploadFilesPage = new UploadFilesPage();
 
     @Then("the user should be able to click any buttons")
     public void the_user_should_be_able_to_click_any_buttons() {
@@ -40,12 +41,17 @@ public class US_10_Files_Update_Settings {
     public void the_user_should_be_able_to_see_storage_usage_is_increased() {
         afterStorage = filePage.storageStatus.getText();
         Assert.assertNotEquals(beforeStorage, afterStorage);
-        TryCloudUtils.removeUploaded("Lorem");
+
+        // Remove uploaded
+        BrowserUtils.highlight(uploadFilesPage.file3row);
+        uploadFilesPage.file3row.click();
+        BrowserUtils.highlight(filePage.optionDelete);
+        filePage.optionDelete.click();
     }
 
     @When("user uploads file3 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = ConfigurationReader.getProperty("file3");
+        String filePath = "D:/Uploads/Lorem.txt";
         filePage.upload.sendKeys(filePath);
         try {
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);

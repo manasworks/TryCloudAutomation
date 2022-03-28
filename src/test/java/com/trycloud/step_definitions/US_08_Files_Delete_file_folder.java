@@ -18,7 +18,7 @@ public class US_08_Files_Delete_file_folder {
         filePage.deletedFilter.click();
         filePage.deletedFilter.click();
         String fileName = FilePage.getFileNameHolder();
-        WebElement element = Driver.getDriver().findElement(By.xpath("//td//*[.='"+fileName+"']"));
+        WebElement element = Driver.getDriver().findElement(By.xpath("(//td//*[.='"+fileName+"'])[1]"));
         BrowserUtils.highlight(element);
         Assert.assertTrue(element.isDisplayed());
         BrowserUtils.highlight(filePage.restoreBtn);

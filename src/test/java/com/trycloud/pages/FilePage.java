@@ -1,8 +1,8 @@
 package com.trycloud.pages;
 
 import com.trycloud.utilities.BrowserUtils;
+import com.trycloud.utilities.ConfigurationReader;
 import com.trycloud.utilities.Driver;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -37,6 +37,8 @@ public class FilePage {
     @FindBy (xpath = "//p[contains(text(),'used')]") public WebElement storageStatus;
     @FindBy (xpath = "//div[@id='uploadprogressbar']") public WebElement uploadBar;
     @FindBy (xpath = "//div[@class='toastify on dialogs error toastify-right toastify-top']/span") public WebElement notEnoughSpaceBtn;
+
+    @FindBy (xpath = "//li[@class=' action-delete-container']") public WebElement optionDelete;
 
     // Holder for actual file name
     private static String fileNameH;

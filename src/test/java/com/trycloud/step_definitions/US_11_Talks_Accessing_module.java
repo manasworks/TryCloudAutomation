@@ -41,7 +41,7 @@ public class US_11_Talks_Accessing_module {
     public void the_user_should_be_able_to_see_the_message_is_displayed_on_the_conversation_log(String string) {
         String message = string + " - " + Driver.getDriver();
         WebElement postedMessage = Driver.getDriver().findElement(By.xpath("//*[.='"+message+"']"));
-        BrowserUtils.highlight(postedMessage);
+        //BrowserUtils.highlight(postedMessage);
         Assert.assertTrue(postedMessage.isDisplayed());
     }
 }
