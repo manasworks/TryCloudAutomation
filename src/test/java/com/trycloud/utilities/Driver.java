@@ -46,7 +46,7 @@ public class Driver {
             }
         }
         driverPool.get().manage().window().maximize();
-        driverPool.get().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driverPool.get().manage().timeouts().implicitlyWait(ConfigurationReader.getNumber("timeout"), TimeUnit.SECONDS);
         return driverPool.get();
     }
 

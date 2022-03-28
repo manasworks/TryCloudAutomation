@@ -40,7 +40,7 @@ public class BrowserUtils {
     }
 
     public static void titleVerify(String expectedTitle){
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), ConfigurationReader.getNumber("timeout"));
         wait.until(ExpectedConditions.titleIs(expectedTitle));
         String actualTitle = Driver.getDriver().getTitle();
         Assert.assertEquals(actualTitle, expectedTitle);
@@ -58,7 +58,7 @@ public class BrowserUtils {
     }
 
     public static void highlight(WebElement element){
-        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), ConfigurationReader.getNumber("timeout"));
         wait.until(ExpectedConditions.visibilityOf(element));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) Driver.getDriver();
 

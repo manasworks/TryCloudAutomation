@@ -5,12 +5,9 @@ import com.trycloud.pages.LoginPage;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class TryCloudUtils {
 
@@ -37,7 +34,7 @@ public class TryCloudUtils {
 
     public static void waitTillUploadBarDisappears(){
         try{
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), ConfigurationReader.getNumber("timeout"));
             FilePage filePage = new FilePage();
             wait.until(ExpectedConditions.invisibilityOf(filePage.uploadBar));
         } catch (Exception e){

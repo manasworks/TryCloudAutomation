@@ -79,6 +79,7 @@ public class US_07_Files_Managing_folders {
     public void verify_the_file_is_displayed_on_the_page(){
         String filePath = ConfigurationReader.getProperty("file2");
         String file = filePath.substring(filePath.lastIndexOf("/")+1);
+        BrowserUtils.sleep(2);
         WebElement uploadedFile = Driver.getDriver().findElement(By.xpath("//*[.='"+file+"']"));
         BrowserUtils.highlight(uploadedFile);
         Assert.assertTrue(uploadedFile.isDisplayed());

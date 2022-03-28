@@ -56,6 +56,7 @@ public class US_06_Files_Remove_upload {
     public void verify_the_file_is_displayed_on_the_page(){
         String filePath = ConfigurationReader.getProperty("file1");
         String file = filePath.substring(filePath.lastIndexOf("/")+1);
+        BrowserUtils.sleep(2);
         WebElement uploadedFile = Driver.getDriver().findElement(By.xpath("//*[.='"+file+"']"));
         BrowserUtils.highlight(uploadedFile);
         Assert.assertTrue(uploadedFile.isDisplayed());
