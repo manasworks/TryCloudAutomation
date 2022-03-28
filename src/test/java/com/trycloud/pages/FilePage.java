@@ -58,17 +58,4 @@ public class FilePage {
         BrowserUtils.highlight(element);
         element.click();
     }
-
-    public static void verifyFileDisplayed(String fileName){
-        WebElement uploadedFile = Driver.getDriver().findElement(By.xpath("//*[.='"+fileName+"']"));
-        BrowserUtils.highlight(uploadedFile);
-        Assert.assertTrue(uploadedFile.isDisplayed());
-
-        // Remove uploaded file
-        WebElement actionsForUploaded = Driver.getDriver().findElement(By.xpath("//span[.='"+fileName+"']/..//a[2]"));
-        BrowserUtils.highlight(actionsForUploaded);
-        actionsForUploaded.click();
-        FilePage.chooseOption("Delete file");
-    }
-
 }

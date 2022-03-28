@@ -37,23 +37,11 @@ public class TryCloudUtils {
 
     public static void waitTillUploadBarDisappears(){
         try{
-            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 600);
+            WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
             FilePage filePage = new FilePage();
             wait.until(ExpectedConditions.invisibilityOf(filePage.uploadBar));
         } catch (Exception e){
             e.printStackTrace();
-        }
-    }
-
-    public static void uploadFile(String path){
-        FilePage filePage = new FilePage();
-        try {
-            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            filePage.notEnoughSpaceBtn.click();
-        } catch (NoSuchElementException e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            filePage.upload.sendKeys(path);
-            TryCloudUtils.waitTillUploadBarDisappears();
         }
     }
 

@@ -13,5 +13,5 @@ Feature: As a user, I should be able to remove files from favorites and upload a
     Given user on the dashboard page
     When the user clicks the "Files" module
     When the user clicks the add icon on the top
-    And user uploads file with the upload file1 option
+    And user uploads file1 with the upload file option
     Then Verify the file1 is displayed on the page

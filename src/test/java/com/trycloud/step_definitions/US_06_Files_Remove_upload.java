@@ -8,7 +8,9 @@ import com.trycloud.utilities.TryCloudUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,16 +35,35 @@ public class US_06_Files_Remove_upload {
         filePage.addNewFileBtn.click();
     }
 
-    @When("user uploads file with the upload file1 option")
+    @When("user uploads file1 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
         String filePath = ConfigurationReader.getProperty("file1");
-        TryCloudUtils.uploadFile(filePath);
+        filePage.upload.sendKeys(filePath);
+        try {
+            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            if (filePage.notEnoughSpaceBtn.isDisplayed()){
+                filePage.notEnoughSpaceBtn.click();
+                filePage.upload.sendKeys(filePath);
+            }
+        } catch (NoSuchElementException e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            e.printStackTrace();
+        }
+        TryCloudUtils.waitTillUploadBarDisappears();
     }
 
     @Then("Verify the file1 is displayed on the page")
     public void verify_the_file_is_displayed_on_the_page(){
         String filePath = ConfigurationReader.getProperty("file1");
         String file = filePath.substring(filePath.lastIndexOf("/")+1);
-        FilePage.verifyFileDisplayed(file);
+        WebElement uploadedFile = Driver.getDriver().findElement(By.xpath("//*[.='"+file+"']"));
+        BrowserUtils.highlight(uploadedFile);
+        Assert.assertTrue(uploadedFile.isDisplayed());
+
+        // Remove uploaded file
+        WebElement actionsForUploaded = Driver.getDriver().findElement(By.xpath("//span[.='"+file+"']/..//a[2]"));
+        BrowserUtils.highlight(actionsForUploaded);
+        actionsForUploaded.click();
+        FilePage.chooseOption("Delete file");
     }
 }
