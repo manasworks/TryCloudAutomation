@@ -52,7 +52,7 @@ public class US_10_Files_Update_Settings {
     @When("user uploads file3 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
         String filePath = "D:/Uploads/Lorem.txt";
-        filePage.upload.sendKeys(filePath);
+
         try {
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             if (filePage.notEnoughSpaceBtn.isDisplayed()){
@@ -61,6 +61,7 @@ public class US_10_Files_Update_Settings {
             }
         } catch (NoSuchElementException e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            filePage.upload.sendKeys(filePath);
             e.printStackTrace();
         }
         TryCloudUtils.waitTillUploadBarDisappears();

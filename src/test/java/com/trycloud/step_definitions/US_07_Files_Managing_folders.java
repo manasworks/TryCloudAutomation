@@ -22,7 +22,8 @@ public class US_07_Files_Managing_folders {
     @When("the user write a {string} to folder name")
     public void the_user_write_a_folder_name(String folderName) {
         BrowserUtils.highlight(filePage.newFolderInput);
-        filePage.newFolderInput.sendKeys(folderName);
+        String customFolder = folderName+Driver.getDriver();
+        filePage.newFolderInput.sendKeys(customFolder);
     }
 
     @When("the user click submit icon")
@@ -40,12 +41,13 @@ public class US_07_Files_Managing_folders {
 
     @Then("Verify the {string} folder is displayed on the page")
     public void verify_the_folder_is_displayed_on_the_page(String folder) {
-        WebElement folderName = Driver.getDriver().findElement(By.xpath("//span[@class='innernametext' and .='" + folder + "']"));
+        String customFolder = folder+Driver.getDriver();
+        WebElement folderName = Driver.getDriver().findElement(By.xpath("//span[@class='innernametext' and .='" + customFolder + "']"));
         BrowserUtils.highlight(folderName);
         Assert.assertTrue(folderName.isDisplayed());
 
         // Remove created folder
-        WebElement actionsForUploaded = Driver.getDriver().findElement(By.xpath("(//span[@class='innernametext' and .='" + folder + "']/../..//a[2])[1]"));
+        WebElement actionsForUploaded = Driver.getDriver().findElement(By.xpath("(//span[@class='innernametext' and .='" + customFolder + "']/../..//a[2])[1]"));
         BrowserUtils.highlight(actionsForUploaded);
         actionsForUploaded.click();
         BrowserUtils.sleep(0.2);
@@ -62,7 +64,6 @@ public class US_07_Files_Managing_folders {
     @When("user uploads file2 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
         String filePath = "D:/Uploads/TryCloud.txt";
-        filePage.upload.sendKeys(filePath);
         try {
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             while (filePage.notEnoughSpaceBtn.isDisplayed()){
@@ -71,6 +72,7 @@ public class US_07_Files_Managing_folders {
             }
         } catch (Exception e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            filePage.upload.sendKeys(filePath);
             e.printStackTrace();
         }
         TryCloudUtils.waitTillUploadBarDisappears();

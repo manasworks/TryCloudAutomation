@@ -20,7 +20,7 @@ public class US_14_Search {
         basePage.searchBtn.click();
     }
 
-    @When("users search any existing {string} file\\/folder\\/user name")
+    @When("users search any existing {string} file_folder_user name")
     public void users_search_any_existing_file_folder_user_name(String search) {
         BrowserUtils.highlight(basePage.searchInput);
         basePage.searchInput.sendKeys(search+ Keys.ENTER);

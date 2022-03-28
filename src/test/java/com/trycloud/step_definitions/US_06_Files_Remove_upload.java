@@ -40,7 +40,7 @@ public class US_06_Files_Remove_upload {
     @When("user uploads file1 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
         String filePath = "D:/Uploads/Ford-F-150.jpg";
-        filePage.upload.sendKeys(filePath);
+
         try {
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             while (filePage.notEnoughSpaceBtn.isDisplayed()){
@@ -49,6 +49,7 @@ public class US_06_Files_Remove_upload {
             }
         } catch (NoSuchElementException e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            filePage.upload.sendKeys(filePath);
             e.printStackTrace();
         }
         TryCloudUtils.waitTillUploadBarDisappears();

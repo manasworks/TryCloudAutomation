@@ -6,9 +6,9 @@ Feature: As a user, I should be able to remove files from the favorites and uplo
     When the user clicks the "Files" module
     And the user clicks the add icon on the top
     And user click the "New folder" top-module
-    And the user write a "Test_19" to folder name
+    And the user write a "Test_" to folder name
     When the user click submit icon
-    Then Verify the "Test_19" folder is displayed on the page
+    Then Verify the "Test_" folder is displayed on the page
 
   Scenario: As a user, I should be able to upload a file inside a folder
     Given user on the dashboard page
