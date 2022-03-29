@@ -2,6 +2,7 @@ package com.trycloud.step_definitions;
 
 import com.trycloud.pages.LoginPage;
 import com.trycloud.utilities.BrowserUtils;
+import com.trycloud.utilities.ConfigurationReader;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
@@ -26,6 +27,7 @@ public class US_01_Login_positive {
 
     @Then("verify the user should be at the dashboard page")
     public void verify_the_user_should_be_at_the_dashboard_page() {
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         BrowserUtils.highlight(loginPage.mainLogo);
         Assert.assertTrue(loginPage.mainLogo.isDisplayed());
     }

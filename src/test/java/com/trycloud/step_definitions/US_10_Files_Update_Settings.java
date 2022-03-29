@@ -3,6 +3,7 @@ package com.trycloud.step_definitions;
 import com.trycloud.pages.FilePage;
 import com.trycloud.pages.UploadFilesPage;
 import com.trycloud.utilities.BrowserUtils;
+import com.trycloud.utilities.ConfigurationReader;
 import com.trycloud.utilities.Driver;
 import com.trycloud.utilities.TryCloudUtils;
 import io.cucumber.java.en.Then;
@@ -52,18 +53,9 @@ public class US_10_Files_Update_Settings {
     @When("user uploads file3 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
         String filePath = "D:/Uploads/Lorem.txt";
-
-        try {
-            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            if (filePage.notEnoughSpaceBtn.isDisplayed()){
-                filePage.notEnoughSpaceBtn.click();
-                filePage.upload.sendKeys(filePath);
-            }
-        } catch (NoSuchElementException e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            filePage.upload.sendKeys(filePath);
-            e.printStackTrace();
-        }
+        BrowserUtils.sleep(2);
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
+        filePage.upload.sendKeys(filePath);
         TryCloudUtils.waitTillUploadBarDisappears();
     }
 }

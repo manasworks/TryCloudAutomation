@@ -23,7 +23,6 @@ public class FilePage {
     @FindBy (xpath = "//*[@class='filename']//*[@class='innernametext']") public WebElement favFileName;
     @FindBy (xpath = "//*[@class='button new']") public WebElement addNewFileBtn;
     @FindBy (xpath = "//div[@class='fileActionsMenu popovermenu bubble open menu']//li[3]//span[2]") public WebElement firstOption;
-    @FindBy (xpath = "//*[@for='file_upload_start']") public WebElement uploadFileBtn;
     @FindBy (xpath = "//input[@id='file_upload_start']") public WebElement upload;
     @FindBy (xpath = "//*[@value='New folder']") public WebElement newFolderInput;
     @FindBy (xpath = "//*[@class='icon-confirm']") public WebElement submitFolderNameBtn;
@@ -53,11 +52,14 @@ public class FilePage {
         WebElement element = Driver.getDriver().findElement(By.xpath("//*[@class='fileActionsMenu popovermenu bubble open menu']//*[contains(text(),'"+option+"')]/.."));
         BrowserUtils.highlight(element);
         element.click();
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
     }
 
     public static void clickSubModule(String module){
+
         WebElement element = Driver.getDriver().findElement(By.xpath("//div[@id='app-navigation']//*[normalize-space(.)='"+module+"']"));
         BrowserUtils.highlight(element);
         element.click();
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
     }
 }

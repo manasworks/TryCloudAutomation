@@ -35,23 +35,15 @@ public class US_06_Files_Remove_upload {
     public void the_user_clicks_the_add_icon_on_the_top() {
         BrowserUtils.highlight(filePage.addNewFileBtn);
         filePage.addNewFileBtn.click();
+        filePage.addNewFileBtn.click();
     }
 
     @When("user uploads file1 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
+        BrowserUtils.sleep(2);
         String filePath = "D:/Uploads/Ford-F-150.jpg";
-
-        try {
-            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            while (filePage.notEnoughSpaceBtn.isDisplayed()){
-                filePage.notEnoughSpaceBtn.click();
-                filePage.upload.sendKeys(filePath);
-            }
-        } catch (NoSuchElementException e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            filePage.upload.sendKeys(filePath);
-            e.printStackTrace();
-        }
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
+        filePage.upload.sendKeys(filePath);
         TryCloudUtils.waitTillUploadBarDisappears();
     }
 

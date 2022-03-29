@@ -2,6 +2,7 @@ package com.trycloud.step_definitions;
 
 import com.trycloud.pages.BasePage;
 import com.trycloud.utilities.BrowserUtils;
+import com.trycloud.utilities.ConfigurationReader;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
@@ -15,6 +16,7 @@ public class US_03_Main_modules {
 
     @Then("Verify the user see the following modules:")
     public void verify_the_user_see_the_following_modules(List<String> expected) {
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         List<String> actual = new ArrayList<>();
         for (WebElement each : basePage.mainModules) {
             BrowserUtils.hover(each);

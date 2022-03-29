@@ -22,6 +22,7 @@ public class TryCloudUtils {
         BrowserUtils.highlight(loginPage.passwordInput);
         loginPage.passwordInput.sendKeys(ConfigurationReader.getProperty("pass")+ Keys.ENTER);
 
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         BrowserUtils.highlight(loginPage.mainLogo);
         Assert.assertTrue(loginPage.mainLogo.isDisplayed());
     }
@@ -30,6 +31,7 @@ public class TryCloudUtils {
         WebElement pageLink = Driver.getDriver().findElement(By.xpath("//ul[@id='appmenu']//a[@aria-label='"+pageName+"']"));
         BrowserUtils.highlight(pageLink);
         pageLink.click();
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
     }
 
     public static void waitTillUploadBarDisappears(){
