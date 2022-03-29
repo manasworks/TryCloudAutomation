@@ -1,5 +1,5 @@
 @regression @smoke
-Feature: As a user, I should be able to update settings.
+Feature: US_10 As a user, I should be able to update settings.
 
   Scenario: Verify users update settings
     Given user on the dashboard page

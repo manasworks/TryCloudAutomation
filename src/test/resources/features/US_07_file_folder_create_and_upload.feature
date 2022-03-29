@@ -1,5 +1,5 @@
 @regression @smoke
-Feature: As a user, I should be able to remove files from the favorites and upload a file directly
+Feature: US_07 As a user, I should be able to remove files from the favorites and upload a file directly
 
   Scenario: As a user, I should be able to add the folder
     Given user on the dashboard page

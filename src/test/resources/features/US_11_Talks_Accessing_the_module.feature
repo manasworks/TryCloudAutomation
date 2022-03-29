@@ -1,5 +1,5 @@
 @regression @smoke
-Feature: As a user, I should be able to access to Talks module
+Feature: US_11 As a user, I should be able to access to Talks module
 
   Scenario: verify users to access to Talks module
     Given user on the dashboard page

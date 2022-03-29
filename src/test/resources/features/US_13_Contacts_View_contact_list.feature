@@ -1,5 +1,5 @@
 @regression @smoke
-Feature: As a user, I should be able to view the contact list.
+Feature: US_13 As a user, I should be able to view the contact list.
 
   Scenario: verify users can see all the contact names on the contact list
     Given user on the dashboard page

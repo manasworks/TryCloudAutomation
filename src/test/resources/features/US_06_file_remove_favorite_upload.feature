@@ -1,5 +1,5 @@
 @regression @smoke
-Feature: As a user, I should be able to remove files from favorites and upload a file directly
+Feature: US_06 As a user, I should be able to remove files from favorites and upload a file directly
 
   Scenario: verify users to upload a file from Files
     Given user on the dashboard page
