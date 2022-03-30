@@ -35,7 +35,6 @@ public class US_06_Files_Remove_upload {
     public void the_user_clicks_the_add_icon_on_the_top() {
         BrowserUtils.highlight(filePage.addNewFileBtn);
         filePage.addNewFileBtn.click();
-        filePage.addNewFileBtn.click();
     }
 
     @When("user uploads file1 with the upload file option")
