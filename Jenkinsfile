@@ -5,9 +5,9 @@ node {
 
     stage('Run tests'){
         if(isUnix()){
-            sh "mvn clean test"
+            sh "mvn clean install Dselenide.browserSize=1900x1200 test"
         } else {
-            bat "mvn clean test"
+            bat "mvn clean install Dselenide.browserSize=1900x1200 test"
         }
     }
 
