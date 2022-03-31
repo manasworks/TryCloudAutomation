@@ -1,13 +1,16 @@
 package com.trycloud.utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 public class Driver {
@@ -22,6 +25,9 @@ public class Driver {
         if (driverPool.get()==null){
 
             String browserType = ConfigurationReader.getProperty("browser");
+
+
+
 
             switch (browserType){
                 case "firefox":
@@ -45,7 +51,8 @@ public class Driver {
                     driverPool.set(new ChromeDriver());
             }
         }
-        driverPool.get().manage().window().maximize();
+        //driverPool.get().manage().window().maximize();
+        driverPool.get().manage().window().setSize(new Dimension(1920, 1080));
         driverPool.get().manage().timeouts().implicitlyWait(ConfigurationReader.getNumber("timeout"), TimeUnit.SECONDS);
         return driverPool.get();
     }
