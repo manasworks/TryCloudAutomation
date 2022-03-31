@@ -70,12 +70,13 @@ public class US_07_Files_Managing_folders {
         try{
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             Assert.assertTrue(uploadFilesPage.file2Name.isDisplayed());
-        } catch (Exception e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             BrowserUtils.highlight(uploadFilesPage.file2row);
             uploadFilesPage.file2row.click();
             BrowserUtils.highlight(filePage.optionDelete);
             filePage.optionDelete.click();
+        } catch (Exception e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         }
         filePage.upload.sendKeys(filePath);
         TryCloudUtils.waitTillUploadBarDisappears();

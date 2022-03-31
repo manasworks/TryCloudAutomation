@@ -46,12 +46,13 @@ public class US_06_Files_Remove_upload {
         try{
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             Assert.assertTrue(uploadFilesPage.file1Name.isDisplayed());
-        } catch (Exception e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             BrowserUtils.highlight(uploadFilesPage.file1row);
             uploadFilesPage.file1row.click();
             BrowserUtils.highlight(filePage.optionDelete);
             filePage.optionDelete.click();
+        } catch (Exception e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         }
         filePage.upload.sendKeys(filePath);
         TryCloudUtils.waitTillUploadBarDisappears();

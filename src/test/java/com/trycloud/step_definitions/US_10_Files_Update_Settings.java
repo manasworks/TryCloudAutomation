@@ -59,12 +59,13 @@ public class US_10_Files_Update_Settings {
         try{
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             Assert.assertTrue(uploadFilesPage.file3Name.isDisplayed());
-        } catch (Exception e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             BrowserUtils.highlight(uploadFilesPage.file3row);
             uploadFilesPage.file3row.click();
             BrowserUtils.highlight(filePage.optionDelete);
             filePage.optionDelete.click();
+        } catch (Exception e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
         }
 
         filePage.upload.sendKeys(filePath);
