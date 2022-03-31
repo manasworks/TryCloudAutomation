@@ -18,6 +18,6 @@ public class UploadFilesPage {
     @FindBy (xpath = "//span[.='TryCloud']") public WebElement file2Name;
     @FindBy (xpath = "//a[@class='action action-menu permanent']") public WebElement file2row;
 
-    @FindBy(xpath = "//span[.='Lorem']") public WebElement file3Name;
-    @FindBy (xpath = "//span[.='Lorem' and @class='innernametext']/../..//a[@class='action action-menu permanent']") public WebElement file3row;
+    @FindBy(xpath = "//span[.='jenkins']") public WebElement file3Name;
+    @FindBy (xpath = "//span[.='jenkins' and @class='innernametext']/../..//a[@class='action action-menu permanent']") public WebElement file3row;
 }
