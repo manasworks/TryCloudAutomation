@@ -9,9 +9,9 @@ import com.trycloud.utilities.TryCloudUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,6 +19,7 @@ public class US_06_Files_Remove_upload {
 
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), ConfigurationReader.getNumber("timeout"));
 
     @Then("Verify the chosen file removed from the table")
     public void verify_the_chosen_file_removed_from_the_table() {
@@ -41,19 +42,6 @@ public class US_06_Files_Remove_upload {
     public void user_uploads_file_with_the_upload_file_option() {
         String filePath = "D:/Uploads/Ford-F-150.jpg";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
-
-        // Check if file already uploaded.
-        try{
-            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            Assert.assertTrue(uploadFilesPage.file1Name.isDisplayed());
-            BrowserUtils.highlight(uploadFilesPage.file1row);
-            uploadFilesPage.file1row.click();
-            BrowserUtils.highlight(filePage.optionDelete);
-            filePage.optionDelete.click();
-        } catch (Exception e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        }
         filePage.upload.sendKeys(filePath);
 
         // Check if upload failed due to Not Enough Space and retry
@@ -67,9 +55,8 @@ public class US_06_Files_Remove_upload {
             TryCloudUtils.waitTillUploadBarDisappears();
         } catch (Exception e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            TryCloudUtils.waitTillUploadBarDisappears();
         }
-
-        TryCloudUtils.waitTillUploadBarDisappears();
     }
 
     @Then("Verify the file1 is displayed on the page")
@@ -78,9 +65,8 @@ public class US_06_Files_Remove_upload {
         Assert.assertTrue(uploadFilesPage.file1Name.isDisplayed());
 
         // Remove uploaded file
-        BrowserUtils.highlight(uploadFilesPage.file1row);
         uploadFilesPage.file1row.click();
-        BrowserUtils.highlight(filePage.optionDelete);
         filePage.optionDelete.click();
+        try{ wait.until(ExpectedConditions.invisibilityOf(uploadFilesPage.file1row));} catch (Exception ignored) {}
     }
 }

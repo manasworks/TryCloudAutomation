@@ -9,8 +9,9 @@ import com.trycloud.utilities.TryCloudUtils;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,6 +19,7 @@ public class US_10_Files_Update_Settings {
 
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), ConfigurationReader.getNumber("timeout"));
 
     @Then("the user should be able to click any buttons")
     public void the_user_should_be_able_to_click_any_buttons() {
@@ -43,30 +45,15 @@ public class US_10_Files_Update_Settings {
         afterStorage = filePage.storageStatus.getText();
         Assert.assertNotEquals(beforeStorage, afterStorage);
 
-        // Remove uploaded
-        BrowserUtils.highlight(uploadFilesPage.file3row);
         uploadFilesPage.file3row.click();
-        BrowserUtils.highlight(filePage.optionDelete);
         filePage.optionDelete.click();
+        try{ wait.until(ExpectedConditions.invisibilityOf(uploadFilesPage.file3row));} catch (Exception ignored) {}
     }
 
     @When("user uploads file3 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = "D:/Uploads/Lorem.txt";
+        String filePath = "D:/Uploads/jenkins.svg";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
-
-        // Check if file already uploaded and delete it
-        try{
-            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            Assert.assertTrue(uploadFilesPage.file3Name.isDisplayed());
-            BrowserUtils.highlight(uploadFilesPage.file3row);
-            uploadFilesPage.file3row.click();
-            BrowserUtils.highlight(filePage.optionDelete);
-            filePage.optionDelete.click();
-        } catch (Exception e){
-            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        }
-
         filePage.upload.sendKeys(filePath);
 
         // Check if upload failed due to Not Enough Space and retry
@@ -75,13 +62,12 @@ public class US_10_Files_Update_Settings {
             Assert.assertTrue(filePage.notEnoughSpaceBtn.isDisplayed());
             BrowserUtils.highlight(filePage.notEnoughSpaceBtn);
             filePage.notEnoughSpaceBtn.click();
-            BrowserUtils.sleep(1);
+            try{ wait.until(ExpectedConditions.invisibilityOf(filePage.notEnoughSpaceBtn));} catch (Exception ignored) {}
             filePage.upload.sendKeys(filePath);
             TryCloudUtils.waitTillUploadBarDisappears();
         } catch (Exception e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            TryCloudUtils.waitTillUploadBarDisappears();
         }
-
-        TryCloudUtils.waitTillUploadBarDisappears();
     }
 }
