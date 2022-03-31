@@ -63,23 +63,20 @@ public class US_07_Files_Managing_folders {
 
     @When("user uploads file2 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
+        String filePath = "D:/Uploads/TryCloud.txt";
+        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
+
         // Check if file already uploaded.
         try{
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-            if (uploadFilesPage.file2Name.isDisplayed()){
-                BrowserUtils.highlight(uploadFilesPage.file2row);
-                uploadFilesPage.file2row.click();
-                BrowserUtils.highlight(filePage.optionDelete);
-                filePage.optionDelete.click();
-            }
+            Assert.assertTrue(uploadFilesPage.file2Name.isDisplayed());
         } catch (Exception e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            Assert.assertTrue(true);
+            BrowserUtils.highlight(uploadFilesPage.file2row);
+            uploadFilesPage.file2row.click();
+            BrowserUtils.highlight(filePage.optionDelete);
+            filePage.optionDelete.click();
         }
-
-        String filePath = "D:/Uploads/TryCloud.txt";
-        BrowserUtils.sleep(2);
-        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         filePage.upload.sendKeys(filePath);
         TryCloudUtils.waitTillUploadBarDisappears();
     }
