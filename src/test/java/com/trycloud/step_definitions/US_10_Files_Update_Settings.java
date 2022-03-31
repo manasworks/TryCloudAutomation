@@ -55,7 +55,7 @@ public class US_10_Files_Update_Settings {
         String filePath = "D:/Uploads/Lorem.txt";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
 
-        // Check if file already uploaded.
+        // Check if file already uploaded and delete it
         try{
             Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
             Assert.assertTrue(uploadFilesPage.file3Name.isDisplayed());
@@ -65,11 +65,23 @@ public class US_10_Files_Update_Settings {
             filePage.optionDelete.click();
         } catch (Exception e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         }
 
         filePage.upload.sendKeys(filePath);
-        TryCloudUtils.waitTillUploadBarDisappears();
 
+        // Check if upload failed due to Not Enough Space and retry
+        try{
+            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            Assert.assertTrue(filePage.notEnoughSpaceBtn.isDisplayed());
+            BrowserUtils.highlight(filePage.notEnoughSpaceBtn);
+            filePage.notEnoughSpaceBtn.click();
+            BrowserUtils.sleep(1);
+            filePage.upload.sendKeys(filePath);
+            TryCloudUtils.waitTillUploadBarDisappears();
+        } catch (Exception e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        }
+
+        TryCloudUtils.waitTillUploadBarDisappears();
     }
 }

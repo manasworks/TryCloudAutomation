@@ -55,6 +55,20 @@ public class US_06_Files_Remove_upload {
 
         }
         filePage.upload.sendKeys(filePath);
+
+        // Check if upload failed due to Not Enough Space and retry
+        try{
+            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            Assert.assertTrue(filePage.notEnoughSpaceBtn.isDisplayed());
+            BrowserUtils.highlight(filePage.notEnoughSpaceBtn);
+            filePage.notEnoughSpaceBtn.click();
+            BrowserUtils.sleep(1);
+            filePage.upload.sendKeys(filePath);
+            TryCloudUtils.waitTillUploadBarDisappears();
+        } catch (Exception e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        }
+
         TryCloudUtils.waitTillUploadBarDisappears();
     }
 
