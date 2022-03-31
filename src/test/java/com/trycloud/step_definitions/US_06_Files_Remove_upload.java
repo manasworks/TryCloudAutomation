@@ -39,6 +39,20 @@ public class US_06_Files_Remove_upload {
 
     @When("user uploads file1 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
+        // Check if file already uploaded.
+        try{
+            Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            if (uploadFilesPage.file1Name.isDisplayed()){
+                BrowserUtils.highlight(uploadFilesPage.file1row);
+                uploadFilesPage.file1row.click();
+                BrowserUtils.highlight(filePage.optionDelete);
+                filePage.optionDelete.click();
+            }
+        } catch (Exception e){
+            Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            Assert.assertTrue(true);
+        }
+
         BrowserUtils.sleep(2);
         String filePath = "D:/Uploads/Ford-F-150.jpg";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));

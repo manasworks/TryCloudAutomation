@@ -1,6 +1,5 @@
 package com.trycloud.step_definitions;
 
-import com.trycloud.pages.BasePage;
 import com.trycloud.utilities.ConfigurationReader;
 import com.trycloud.utilities.Driver;
 import com.trycloud.utilities.TryCloudUtils;
