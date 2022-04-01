@@ -29,7 +29,7 @@ public class FilePage {
     @FindBy (xpath = "//th[@id='headerDate']//span[.='Deleted']/..") public WebElement deletedFilter;
     @FindBy (xpath = "(//a[@class='action action-restore permanent'])[1]") public WebElement restoreBtn;
     @FindBy (id = "commentsTabView") public WebElement commentBtn;
-    @FindBy (xpath = "//div[@class='message' and @data-placeholder='New comment …']") public WebElement commentInput;
+    @FindBy (xpath = "//div[@class='message']") public WebElement commentInput;
     @FindBy (xpath = "//input[@class='submit icon-confirm has-tooltip']") public WebElement commentSubmit;
     @FindBy (xpath = "//div[@id='app-settings-content']//input[@type='checkbox']//following-sibling::label") public List<WebElement> settingsCheckboxesBtn;
     @FindBy (xpath = "//div[@id='app-settings-content']//input[@type='checkbox']") public List<WebElement> settingsCheckboxes;
