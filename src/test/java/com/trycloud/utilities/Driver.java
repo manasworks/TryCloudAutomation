@@ -53,7 +53,7 @@ public class Driver {
         }
 
         driverPool.get().manage().window().setSize(new Dimension(1920, 1080));
-        driverPool.get().manage().window().maximize();
+        //driverPool.get().manage().window().maximize();
         driverPool.get().manage().timeouts().implicitlyWait(ConfigurationReader.getNumber("timeout"), TimeUnit.SECONDS);
         return driverPool.get();
     }
