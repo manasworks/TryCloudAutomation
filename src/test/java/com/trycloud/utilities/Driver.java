@@ -8,8 +8,10 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -25,9 +27,6 @@ public class Driver {
         if (driverPool.get()==null){
 
             String browserType = ConfigurationReader.getProperty("browser");
-
-
-
 
             switch (browserType){
                 case "firefox":
