@@ -10,8 +10,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +17,8 @@ public class US_06_Files_Remove_upload {
 
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), ConfigurationReader.getNumber("timeout"));
+    String systemPath = System.getProperty("user.dir");
+
 
     @Then("Verify the chosen file removed from the table")
     public void verify_the_chosen_file_removed_from_the_table() {
@@ -40,9 +39,10 @@ public class US_06_Files_Remove_upload {
 
     @When("user uploads file1 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = "D:/Uploads/Ford-F-150.jpg";
+        String filePath = systemPath+"/src/test/resources/files/Ford-F-150.jpg";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         filePage.upload.sendKeys(filePath);
+        filePage.addNewFileBtn.click();
 
         // Check if upload failed due to Not Enough Space and retry
         try{
@@ -67,6 +67,6 @@ public class US_06_Files_Remove_upload {
         // Remove uploaded file
         uploadFilesPage.file1row.click();
         filePage.optionDelete.click();
-        try{ wait.until(ExpectedConditions.invisibilityOf(uploadFilesPage.file1row));} catch (Exception ignored) {}
+        TryCloudUtils.waitTillUploadBarDisappears();
     }
 }

@@ -16,8 +16,8 @@ public class UploadFilesPage {
     @FindBy (xpath = "//span[.='Ford-F-150' and @class='innernametext']/../..//a[@class='action action-menu permanent']") public WebElement file1row;
 
     @FindBy (xpath = "//span[.='TryCloud']") public WebElement file2Name;
-    @FindBy (xpath = "//a[@class='action action-menu permanent']") public WebElement file2row;
+    @FindBy (xpath = "//span[.='TryCloud' and @class='innernametext']/../..//a[@class='action action-menu permanent']") public WebElement file2row;
 
-    @FindBy(xpath = "//span[.='jenkins']") public WebElement file3Name;
-    @FindBy (xpath = "//span[.='jenkins' and @class='innernametext']/../..//a[@class='action action-menu permanent']") public WebElement file3row;
+    @FindBy(xpath = "//span[.='testing']") public WebElement file3Name;
+    @FindBy (xpath = "//span[.='testing' and @class='innernametext']/../..//a[@class='action action-menu permanent']") public WebElement file3row;
 }

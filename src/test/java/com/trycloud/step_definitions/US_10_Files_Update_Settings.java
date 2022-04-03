@@ -11,15 +11,14 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.concurrent.TimeUnit;
 
 public class US_10_Files_Update_Settings {
 
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), ConfigurationReader.getNumber("timeout"));
+    String systemPath = System.getProperty("user.dir");
+
 
     @Then("the user should be able to click any buttons")
     public void the_user_should_be_able_to_click_any_buttons() {
@@ -47,12 +46,12 @@ public class US_10_Files_Update_Settings {
 
         uploadFilesPage.file3row.click();
         filePage.optionDelete.click();
-        try{ wait.until(ExpectedConditions.invisibilityOf(uploadFilesPage.file3row));} catch (Exception ignored) {}
+        TryCloudUtils.waitTillUploadBarDisappears();
     }
 
     @When("user uploads file3 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = "D:/Uploads/jenkins.svg";
+        String filePath = systemPath+"/src/test/resources/files/testing.png";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         filePage.upload.sendKeys(filePath);
 
@@ -62,7 +61,7 @@ public class US_10_Files_Update_Settings {
             Assert.assertTrue(filePage.notEnoughSpaceBtn.isDisplayed());
             BrowserUtils.highlight(filePage.notEnoughSpaceBtn);
             filePage.notEnoughSpaceBtn.click();
-            try{ wait.until(ExpectedConditions.invisibilityOf(filePage.notEnoughSpaceBtn));} catch (Exception ignored) {}
+            BrowserUtils.sleep(1);
             filePage.upload.sendKeys(filePath);
             TryCloudUtils.waitTillUploadBarDisappears();
         } catch (Exception e){

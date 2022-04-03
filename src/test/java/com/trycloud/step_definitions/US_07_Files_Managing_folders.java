@@ -11,8 +11,6 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +18,7 @@ public class US_07_Files_Managing_folders {
 
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
-    WebDriverWait wait = new WebDriverWait(Driver.getDriver(), ConfigurationReader.getNumber("timeout"));
+    String systemPath = System.getProperty("user.dir");
 
     @When("the user write a {string} to folder name")
     public void the_user_write_a_folder_name(String folderName) {
@@ -66,9 +64,10 @@ public class US_07_Files_Managing_folders {
 
     @When("user uploads file2 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = "D:/Uploads/TryCloud.txt";
+        String filePath = systemPath+"/src/test/resources/files/TryCloud.txt";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         filePage.upload.sendKeys(filePath);
+        filePage.addNewFileBtn.click();
 
         // Check if upload failed due to Not Enough Space and retry
         try{
@@ -92,8 +91,11 @@ public class US_07_Files_Managing_folders {
         Assert.assertTrue(uploadFilesPage.file2Name.isDisplayed());
 
         // Remove uploaded file
+        BrowserUtils.highlight(uploadFilesPage.file2row);
         uploadFilesPage.file2row.click();
+        BrowserUtils.highlight(filePage.optionDelete);
         filePage.optionDelete.click();
-        try{ wait.until(ExpectedConditions.invisibilityOf(uploadFilesPage.file2row));} catch (Exception ignored) {}
+        TryCloudUtils.waitTillUploadBarDisappears();
+
     }
 }
