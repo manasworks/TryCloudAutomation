@@ -18,7 +18,7 @@ public class US_10_Files_Update_Settings {
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
     //String systemPath = System.getProperty("user.dir");
-    String systemPath = "http://44.201.179.195:8081/job/TryCloud/ws/";
+    String systemPath = "D:/Uploads/";
 
     @Then("the user should be able to click any buttons")
     public void the_user_should_be_able_to_click_any_buttons() {
