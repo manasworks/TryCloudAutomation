@@ -39,7 +39,7 @@ public class US_06_Files_Remove_upload {
 
     @When("user uploads file1 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = systemPath+"/src/test/resources/files/Ford-F-150.jpg";
+        String filePath = systemPath+"\\src\\test\\resources\\files\\Ford-F-150.jpg";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         filePage.upload.sendKeys(filePath);
         filePage.addNewFileBtn.click();

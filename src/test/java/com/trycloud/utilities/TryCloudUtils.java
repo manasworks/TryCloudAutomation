@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TryCloudUtils {
 
-
-
     public static void login(){
         LoginPage loginPage = new LoginPage();
 

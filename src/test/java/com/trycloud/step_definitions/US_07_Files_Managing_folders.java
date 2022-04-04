@@ -64,7 +64,7 @@ public class US_07_Files_Managing_folders {
 
     @When("user uploads file2 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = systemPath+"/src/test/resources/files/TryCloud.txt";
+        String filePath = systemPath+"\\src\\test\\resources\\files\\TryCloud.txt";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         filePage.upload.sendKeys(filePath);
         filePage.addNewFileBtn.click();
