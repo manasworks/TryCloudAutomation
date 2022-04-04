@@ -17,7 +17,7 @@ public class US_10_Files_Update_Settings {
 
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
-    String systemPath = "C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TryCloud";
+    String systemPath = System.getProperty("user.dir");
 
 
     @Then("the user should be able to click any buttons")
