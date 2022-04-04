@@ -51,7 +51,8 @@ public class US_10_Files_Update_Settings {
 
     @When("user uploads file3 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = systemPath+"\\src\\test\\resources\\files\\testing.png";
+        systemPath = systemPath.replace("\\", "/");
+        String filePath = systemPath+"/src/test/resources/files/testing.png";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         filePage.upload.sendKeys(filePath);
 

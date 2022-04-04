@@ -6,7 +6,7 @@ Feature: US_10 As a user, I should be able to update settings.
     When the user clicks the "Files" module
     And user click the "Settings" sub-module
     Then the user should be able to click any buttons
-
+  @wip
   Scenario: Verify users to see the app storage usage
     Given user on the dashboard page
     When the user clicks the "Files" module
