@@ -17,8 +17,7 @@ public class US_10_Files_Update_Settings {
 
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
-    //String systemPath = System.getProperty("user.dir");
-    String systemPath = "D:/Uploads/";
+    String systemPath = System.getProperty("user.dir");
 
     @Then("the user should be able to click any buttons")
     public void the_user_should_be_able_to_click_any_buttons() {
@@ -51,7 +50,7 @@ public class US_10_Files_Update_Settings {
 
     @When("user uploads file3 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = systemPath+"src/test/resources/files/testing.png";
+        String filePath = systemPath+"/src/test/resources/files/testing.png";
         BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
         filePage.upload.sendKeys(filePath);
 
