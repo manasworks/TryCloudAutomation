@@ -51,7 +51,7 @@ public class US_10_Files_Update_Settings {
     public void user_uploads_file_with_the_upload_file_option() {
         File file;
         if (System.getProperty("os.name").contains("Windows")){
-            String path="5/./src/test/resources/files/testing.png";
+            String path="./src/test/resources/files/testing.png";
             file=new File(path);
         }else {
             String pathOfProject=System.getProperty("user.dir");
