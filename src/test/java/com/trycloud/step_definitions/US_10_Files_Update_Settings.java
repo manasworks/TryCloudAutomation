@@ -49,16 +49,16 @@ public class US_10_Files_Update_Settings {
 
     @When("user uploads file3 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        File file;
+
+        String path;
         if (System.getProperty("os.name").contains("Windows")){
-            String path="./src/test/resources/files/testing.png";
-            file=new File(path);
+            path="./src/test/resources/files/testing.png";
         }else {
             String pathOfProject=System.getProperty("user.dir");
             String pathOfFile="/src/test/resources/files/testing.png";
-            String path=pathOfProject+pathOfFile;
-            file=new File(path);
+            path=pathOfProject+pathOfFile;
         }
+        File file = new File(path);
         System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
         filePage.upload.sendKeys(file.getAbsolutePath());
 
