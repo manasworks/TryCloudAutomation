@@ -60,6 +60,8 @@ public class US_10_Files_Update_Settings {
         }
         File file = new File(path);
         Assert.assertTrue(">>>>>>> FILE NOT FOUND",file.exists());
+        System.out.println("PATH  "+file.getPath());
+        ///job/TryCloud/ws/src/test/resources/files/
         System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
         filePage.upload.sendKeys(file.getAbsolutePath());
 
