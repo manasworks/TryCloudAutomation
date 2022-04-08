@@ -53,6 +53,7 @@ public class US_10_Files_Update_Settings {
         if (System.getProperty("os.name").contains("Windows")){
             String path="./src/test/resources/files/testing.png";
             file=new File(path);
+            Assert.assertTrue(file.exists());
         }else {
             String pathOfProject=System.getProperty("user.dir");
             String pathOfFile="/src/test/resources/files/testing.png";
