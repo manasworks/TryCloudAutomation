@@ -3,7 +3,6 @@ package com.trycloud.step_definitions;
 import com.trycloud.pages.FilePage;
 import com.trycloud.pages.UploadFilesPage;
 import com.trycloud.utilities.BrowserUtils;
-import com.trycloud.utilities.ConfigurationReader;
 import com.trycloud.utilities.Driver;
 import com.trycloud.utilities.TryCloudUtils;
 import io.cucumber.java.en.Then;
@@ -12,13 +11,13 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class US_07_Files_Managing_folders {
 
     FilePage filePage = new FilePage();
     UploadFilesPage uploadFilesPage = new UploadFilesPage();
-    String systemPath = System.getProperty("user.dir");
 
     @When("the user write a {string} to folder name")
     public void the_user_write_a_folder_name(String folderName) {
@@ -64,9 +63,17 @@ public class US_07_Files_Managing_folders {
 
     @When("user uploads file2 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = systemPath+"\\src\\test\\resources\\files\\TryCloud.txt";
-        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
-        filePage.upload.sendKeys(filePath);
+        File file;
+        if (System.getProperty("os.name").contains("Windows")){
+            String path="./src/test/resources/files/TryCloud.txt";
+            file=new File(path);
+        }else {
+            String pathOfProject=System.getProperty("user.dir");
+            String pathOfFile="/src/test/resources/files/TryCloud.txt";
+            String path=pathOfProject+pathOfFile;
+            file=new File(path);
+        }
+        filePage.upload.sendKeys(file.getAbsolutePath());
         filePage.addNewFileBtn.click();
 
         // Check if upload failed due to Not Enough Space and retry
@@ -76,7 +83,7 @@ public class US_07_Files_Managing_folders {
             BrowserUtils.highlight(filePage.notEnoughSpaceBtn);
             filePage.notEnoughSpaceBtn.click();
             BrowserUtils.sleep(1);
-            filePage.upload.sendKeys(filePath);
+            filePage.upload.sendKeys(file.getAbsolutePath());
             TryCloudUtils.waitTillUploadBarDisappears();
         } catch (Exception e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

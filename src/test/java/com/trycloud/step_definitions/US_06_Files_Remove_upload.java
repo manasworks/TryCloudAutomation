@@ -11,6 +11,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class US_06_Files_Remove_upload {
@@ -39,9 +40,17 @@ public class US_06_Files_Remove_upload {
 
     @When("user uploads file1 with the upload file option")
     public void user_uploads_file_with_the_upload_file_option() {
-        String filePath = systemPath+"\\src\\test\\resources\\files\\Ford-F-150.jpg";
-        BrowserUtils.waitForPageToLoad(ConfigurationReader.getNumber("timeout"));
-        filePage.upload.sendKeys(filePath);
+        File file;
+        if (System.getProperty("os.name").contains("Windows")){
+            String path="./src/test/resources/files/Ford-F-150.jpg";
+            file=new File(path);
+        }else {
+            String pathOfProject=System.getProperty("user.dir");
+            String pathOfFile="/src/test/resources/files/Ford-F-150.jpg";
+            String path=pathOfProject+pathOfFile;
+            file=new File(path);
+        }
+        filePage.upload.sendKeys(file.getAbsolutePath());
         filePage.addNewFileBtn.click();
 
         // Check if upload failed due to Not Enough Space and retry
@@ -51,7 +60,7 @@ public class US_06_Files_Remove_upload {
             BrowserUtils.highlight(filePage.notEnoughSpaceBtn);
             filePage.notEnoughSpaceBtn.click();
             BrowserUtils.sleep(1);
-            filePage.upload.sendKeys(filePath);
+            filePage.upload.sendKeys(file.getAbsolutePath());
             TryCloudUtils.waitTillUploadBarDisappears();
         } catch (Exception e){
             Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
