@@ -52,7 +52,7 @@ public class US_10_Files_Update_Settings {
 
         String path;
         if (System.getProperty("os.name").contains("Windows")){
-            path="ws/src/test/resources/files/testing.png";
+            path="./src/test/resources/files/testing.png";
         }else {
             String pathOfProject=System.getProperty("user.dir");
             String pathOfFile="/src/test/resources/files/testing.png";
@@ -63,7 +63,8 @@ public class US_10_Files_Update_Settings {
         System.out.println("PATH  "+file.getPath());
         ///job/TryCloud/ws/src/test/resources/files/
         System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
-        filePage.upload.sendKeys(file.getAbsolutePath());
+        //filePage.upload.sendKeys(file.getAbsolutePath());
+        filePage.upload.sendKeys("C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\TryCloud\\ws\\src\\test\\resources\\files\\testing.png");
 
         // Check if upload failed due to Not Enough Space and retry
         try{
