@@ -59,6 +59,7 @@ public class US_10_Files_Update_Settings {
             String path=pathOfProject+pathOfFile;
             file=new File(path);
         }
+        System.out.println("file.getAbsolutePath() = " + file.getAbsolutePath());
         filePage.upload.sendKeys(file.getAbsolutePath());
 
         // Check if upload failed due to Not Enough Space and retry
