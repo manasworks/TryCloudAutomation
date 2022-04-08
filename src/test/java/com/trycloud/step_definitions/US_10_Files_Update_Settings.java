@@ -51,12 +51,12 @@ public class US_10_Files_Update_Settings {
     public void user_uploads_file_with_the_upload_file_option() {
         File file;
         if (System.getProperty("os.name").contains("Windows")){
-            String path=System.getenv("BUILD_NUMBER")+"./src/test/resources/files/testing.png";
+            String path="4/./src/test/resources/files/testing.png";
             file=new File(path);
             Assert.assertTrue(file.exists());
         }else {
             String pathOfProject=System.getProperty("user.dir");
-            String pathOfFile=System.getenv("BUILD_NUMBER")+"/src/test/resources/files/testing.png";
+            String pathOfFile="/src/test/resources/files/testing.png";
             String path=pathOfProject+pathOfFile;
             file=new File(path);
         }
